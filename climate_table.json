@@ -1,0 +1,60 @@
+{
+	"database": [
+					{
+						"name": "global_and_temperatures_by_country",
+						"columns": [
+								{"name": "dt", "dtype": "date"},
+								{"name": "country_averagetemperature", "dtype": "float"},
+								{"name": "country_averagetemperatureuncertainty", "dtype": "float"},
+								{"name": "country", "dtype": "text"}
+								],
+						"unique": [
+										{"name":"dt"},
+										{"name":"country"}
+										]
+					},
+
+					{
+						"name": "global_and_temperatures_by_major_city",
+						"columns": [
+								{"name": "dt", "dtype": "date"},
+								{"name": "city_averagetemperature", "dtype": "float"},
+								{"name": "city_averagetemperatureuncertainty", "dtype": "float"},
+								{"name": "city", "dtype": "text"},
+								{"name": "country", "dtype": "text"},
+								{"name": "latitude", "dtype": "float" },
+								{"name": "longitude", "dtype": "float"},
+								{"name": "geometry", "dtype": "geometry"}
+								],
+						"unique": [
+										{"name":"dt"},
+										{"name":"city"}
+								]
+					},
+
+					{
+						"name": "link_temperature_city_country",
+						"columns": [
+									{"name": "dt", "dtype": "date"},
+									{"name": "country_averagetemperature", "dtype": "float"},
+									{"name": "country_averagetemperatureuncertainty", "dtype": "float"},
+									{"name": "country", "dtype": "text"},
+									{"name": "city_averagetemperature", "dtype": "float"},
+									{"name": "city_averagetemperatureuncertainty", "dtype": "float"},
+									{"name": "city", "dtype": "text"},
+									{"name": "latitude", "dtype": "float" },
+									{"name": "longitude", "dtype": "float"},
+									{"name": "geometry", "dtype": "geometry"}
+									],
+						"combination": [
+										{	"table1":"global_and_temperatures_by_country",
+											"table1_columns": ["dt", "country_averagetemperature", "country_averagetemperatureuncertainty", "country"] },
+										{
+											"table2":"global_and_temperatures_by_major_city",
+											"table2_columns": ["city_averagetemperature", "city_averagetemperatureuncertainty", "city", "latitude", "longitude", "geometry" ]
+										}
+
+										]
+					}
+			]
+}
